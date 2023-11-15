@@ -8,5 +8,14 @@ namespace TextRPG
 {
     public class Map
     {
+        struct tile
+        {
+            char graphic;
+        }
+
+        public Map(char[] template) 
+        { 
+            
+        }
     }
 }

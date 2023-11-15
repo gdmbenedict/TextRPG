@@ -10,6 +10,7 @@ namespace TextRPG
     {
         static void Main(string[] args)
         {
+
         }
     }
 }

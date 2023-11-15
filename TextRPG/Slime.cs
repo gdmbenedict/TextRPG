@@ -8,6 +8,7 @@ namespace TextRPG
 {
     public class Slime : Enemy
     {
+
     }
 
     public class GreenSlime : Slime

@@ -1,0 +1,15 @@
+player
+	+ Stores HP
+	+ Stores Attack
+	- Able to Move (WASD and Arrow Keys)
+	- Attack function
+	
+Enemy
+	+ Stores HP
+	+ Stores Attack
+	- AI Movement and priorities *dependant on particular enemy
+	- Attack function
+
+Map
+	+ Stores Map Array
+	- Impassible property for tiles (bouderies / wall)
