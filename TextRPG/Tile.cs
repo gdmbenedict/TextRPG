@@ -130,24 +130,6 @@ namespace TextRPG
         }
 
         /*
-         * Mutator method that sets symbol of tile
-         * Input: (char) symbol: the symbol you want to set the tile as
-         */
-        public void SetSymbol(char symbol)
-        {
-            this.symbol = symbol;
-        }
-
-        /*
-         * Accessor method for symbol of tile
-         * Output: (char) symbol: the symbol of the tile
-         */
-        public char GetSymbol()
-        {
-            return symbol;
-        }
-
-        /*
          * Mutator method that sets name
          * Input: (string) name: the name of the tile
          */
@@ -163,6 +145,24 @@ namespace TextRPG
         public string GetName()
         {
             return name;
+        }
+
+        /*
+         * Mutator method that sets symbol of tile
+         * Input: (char) symbol: the symbol you want to set the tile as
+         */
+        public void SetSymbol(char symbol)
+        {
+            this.symbol = symbol;
+        }
+
+        /*
+         * Accessor method for symbol of tile
+         * Output: (char) symbol: the symbol of the tile
+         */
+        public char GetSymbol()
+        {
+            return symbol;
         }
 
         /*
