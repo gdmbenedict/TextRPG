@@ -227,77 +227,17 @@ namespace TextRPG
 
         /*
          * Method that sends the damage details in the form of an int array
-         * Output: (int[ ]) damageDetails: the details of damage stored in an int array
+         * Output: (int[]) damageDetails: the details of damage stored in an int array
          *      damageDetails[0] = damage value
          *      damageDetails[1] = damage type
          */
-        public int[] DealDamage()
+        public void DealDamage(Entity target)
         {
             //int variable to store damage type according to type to int conversion
-            int damageType;
-
-            //converting damage type into int
-            switch (this.damageType)
-            {
-                case DamageType.acid:
-                    damageType = 0;
-                    break;
-
-                case DamageType.bludgeoning:
-                    damageType = 1;
-                    break;
-
-                case DamageType.cold:
-                    damageType = 2;
-                    break;
-
-                case DamageType.fire:
-                    damageType = 3;
-                    break;
-
-                case DamageType.force:
-                    damageType = 4;
-                    break;
-
-                case DamageType.lightning:
-                    damageType = 5;
-                    break;
-
-                case DamageType.necrotic:
-                    damageType = 6;
-                    break;
-
-                case DamageType.piercing:
-                    damageType = 7;
-                    break;
-
-                case DamageType.poison:
-                    damageType = 8;
-                    break;
-
-                case DamageType.psychic:
-                    damageType = 9;
-                    break;
-
-                case DamageType.radiant:
-                    damageType = 10;
-                    break;
-
-                case DamageType.slashing:
-                    damageType = 11;
-                    break;
-
-                case DamageType.sound:
-                    damageType = 12;
-                    break;
-
-                default:
-                    damageType = 4;
-                    break;
-            }
+            int damageType = this.damageType.DamageTypeToInt();
 
             int[] damageDetails = {damage, damageType};
-            return damageDetails;
+            target.TakeDamage(damageDetails);
         }
     }
 }

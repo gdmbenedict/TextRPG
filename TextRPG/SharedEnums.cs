@@ -89,6 +89,4 @@ namespace TextRPG
             return (Size)intsize;
         }
     }
-
-
 }
