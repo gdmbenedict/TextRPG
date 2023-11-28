@@ -9,28 +9,10 @@ namespace TextRPG
     internal class Tile
     {
         /*
-         * Class for a tile object in an text based RPG map.
+         * Class for a Tile object in an text based RPG map.
          * Author: Matthieu Benedict
          * Last Updated: 2023-11-27
          */
-
-        //damage type enum
-        public enum DamageType
-        {
-            acid,           //0
-            bludgeoning,    //1
-            cold,           //2
-            fire,           //3
-            force,          //4
-            lightning,      //5
-            necrotic,       //6
-            piercing,       //7
-            poison,         //8
-            psychic,        //9
-            radiant,        //10
-            slashing,       //11
-            sound           //12
-        }
 
         //Variables
         private char symbol;
@@ -43,9 +25,9 @@ namespace TextRPG
 
 
         /*
-         * Constructor method for a tile object.
+         * Constructor method for a Tile object.
          * Input: (char) tileType: character which determines what type of tile is used
-         * Output: (Tile) tile: an object of type tile.
+         * Output: (Tile) tile: an object of type Tile.
          */
         public Tile(char tileType)
         {
@@ -71,7 +53,7 @@ namespace TextRPG
                     damage = 0;
                     damageType = DamageType.force;
                     break;
-
+                //door
                 case '/':
                     symbol = tileType;
                     name = "door";
@@ -81,7 +63,7 @@ namespace TextRPG
                     damage = 0;
                     damageType = DamageType.force;
                     break;
-
+                //floor
                 case '.':
                     symbol = tileType;
                     name = "floor";
@@ -91,7 +73,7 @@ namespace TextRPG
                     damage = 0;
                     damageType = DamageType.force;
                     break;
-
+                //lava
                 case 'l':
                     symbol = '~';
                     name = "lava";
@@ -101,7 +83,7 @@ namespace TextRPG
                     damage = 10;
                     damageType = DamageType.fire;
                     break;
-
+                //walls
                 case '-':
                 case '|':
                 case '+':
@@ -113,24 +95,30 @@ namespace TextRPG
                     damage = 0;
                     damageType = DamageType.force;
                     break;
-
+                //water
                 case 'w':
                     symbol = '~';
                     name = "water";
                     color = ConsoleColor.Blue;
                     impassable = false;
-                    dangerous = true;
-                    damage = 10;
-                    damageType = DamageType.fire;
+                    dangerous = false;
+                    damage = 0;
+                    damageType = DamageType.cold;
                     break;
-
+                //unkown
                 default:
+                    symbol = tileType;
+                    name = "???";
+                    color = ConsoleColor.Gray;
+                    impassable = false;
+                    dangerous = false;
+                    damageType = DamageType.bludgeoning;
                     break;
             }
         }
 
         /*
-         * Mutator method that sets name
+         * Mutator method that sets name of tile
          * Input: (string) name: the name of the tile
          */
         public void SetName(string name)
