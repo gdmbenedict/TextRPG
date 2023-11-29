@@ -19,6 +19,8 @@ namespace TextRPG
         private string mapName;
         private Tile[,] background;
         private Entity[,] entities;
+        private int height;
+        private int width;
 
         /*
          * Constructor method for a map object
@@ -28,7 +30,7 @@ namespace TextRPG
         public Map(string path)
         {
             //declaring some variables (default values added to handle no value error)
-            int height, width, startIndex =0, endIndex =0;
+            int startIndex =0, endIndex =0;
 
             //check if file exists
             if (!File.Exists(@path))
@@ -81,12 +83,54 @@ namespace TextRPG
         }
 
         /*
-         * Method that draws the contents of the map on to the console
-         * this method will have to be re-written when UI is added
+         * Method that prints the visuals of the map to screen
+         * Input: (int) startPosCol: column (x-axis) starting position to print
+         * Input: (int) startPosRow: row (y-axis) starting position to print
          */
-        public void DrawMap()
+        public void PrintMap(int startPosCol, int startPosRow)
         {
+            for (int y=0; y<height; y++)
+            {
+                for (int x=0; x<width; x++)
+                {
+                    //setting cursor position
+                    Console.SetCursorPosition(startPosCol + x, startPosRow + y);
 
+                    if (entities[y,x] == null)
+                    {
+                        //print Tile to screen
+                        Console.ForegroundColor = background[y,x].GetColor();
+                        Console.Write(background[y,x].GetSymbol());
+                    }
+
+                    //include item check here
+
+                    else
+                    {
+                        //print entity to screen
+                        Console.ForegroundColor = entities[y,x].GetColor();
+                        Console.Write(entities[y,x].GetSymbol());
+                    }
+                }
+            }
+        }
+
+        /*
+         * Accessor method for Height of the Map
+         * Output: (int) height: the length of a column of the map array
+         */
+        public int GetHeight()
+        {
+            return height;
+        }
+
+        /*
+         * Accessor method for the width of Map
+         * Output: (int) width: the width of a row of the map array
+         */
+        public int GetWidth()
+        {
+            return width;
         }
     }
 }
