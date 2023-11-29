@@ -25,9 +25,9 @@ namespace TextRPG
 
 
         /*
-         * Constructor method for a Tile object.
+         * Constructor method for a Tile object
          * Input: (char) tileType: character which determines what type of tile is used
-         * Output: (Tile) tile: an object of type Tile.
+         * Output: (Tile) tile: an object of type Tile
          */
         public Tile(char tileType)
         {
