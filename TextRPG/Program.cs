@@ -23,10 +23,42 @@ namespace TextRPG
             //setting console window settings
             Console.SetWindowSize(width, height);
             Console.SetBufferSize(width * 2, height * 2);
+            Console.CursorVisible = false;
+
+            //setting a player starting position
+            int[] pos = { 5, 12 };
+
+            //adding player to map
+            map.AddEntity(new Player("player", Size.medium, 14, 14, 14 ,14 ,14, 14, 14), pos);
 
             map.PrintMap(0,0);
 
-            Console.ReadKey();
+            bool gameOver = false;
+            int[] index = new int[2];
+
+            //test game loop
+            while (!gameOver)
+            {
+                for (int i=0; i<map.GetHeight(); i++)
+                {
+                    for (int j=0; j<map.GetWidth(); j++)
+                    {
+                        index[0] = i;
+                        index[1] = j;
+
+                        if (map.GetEntity(index) != null && !map.GetEntity(index).TookTurn())
+                        {
+                            gameOver = map.GetEntity(index).ChooseMove(map, index);
+                        }
+
+                    }
+                }
+
+                map.PrintMap(0, 0);
+                map.clearTurns();
+            }
+
+            
         }
     }
 }

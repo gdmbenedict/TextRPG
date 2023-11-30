@@ -12,7 +12,7 @@ namespace TextRPG
         /*
          * Class for a Map object in an text based RPG.
          * Author: Matthieu Benedict
-         * Last Updated: 2023-11-28
+         * Last Updated: 2023-11-29
          */
 
         //Map Variables
@@ -176,6 +176,23 @@ namespace TextRPG
         public void RemoveEntity(int[] pos)
         {
             entities[pos[0], pos[1]] = null;
+        }
+
+        public Entity[,] GetEntities()
+        {
+            return entities;
+        }
+
+        public void clearTurns()
+        {
+            foreach (Entity entity in entities)
+            {
+                if (entity != null)
+                {
+                    entity.clearTurn();
+                }
+                
+            }
         }
     }
 }

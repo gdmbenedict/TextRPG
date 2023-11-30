@@ -11,7 +11,7 @@ namespace TextRPG
         /*
          * Class for a Entity object in an text based RPG.
          * Author: Matthieu Benedict
-         * Last Updated: 2023-11-28
+         * Last Updated: 2023-11-29
          */
 
         //Entity variables
@@ -35,6 +35,7 @@ namespace TextRPG
         private int chaMod;
         private int luc;
         private int lucMod;
+        private bool tookTurn;
 
         /*
          * Constructor method for an abstract Entity object
@@ -77,6 +78,8 @@ namespace TextRPG
             chaMod = getMod(cha);
 
             maxHp = calcMaxHp();
+
+            tookTurn = false;
         }
 
         /*
@@ -115,7 +118,14 @@ namespace TextRPG
                 map.AddEntity(map.GetEntity(startPos), endPos); //puts entity into new location
                 map.RemoveEntity(startPos); //removes entity from old location
             }
+
+            tookTurn = true;
         }
+
+        /*
+         * abstract method for choosing movement, based on child
+         */
+        public abstract bool ChooseMove(Map map, int[] startPos);
 
         /*
          * Method that sends an attack's damageDetails in the form of an int array
@@ -555,6 +565,16 @@ namespace TextRPG
         public int GetLucMod()
         {
             return lucMod;
+        }
+
+        public void clearTurn()
+        {
+            tookTurn = false;
+        }
+
+        public bool TookTurn()
+        {
+            return tookTurn;
         }
 
         /*
