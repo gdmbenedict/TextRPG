@@ -132,5 +132,50 @@ namespace TextRPG
         {
             return width;
         }
+
+        /*
+         * Accessor method for specified Tile in map background
+         * Input: (int[]) pos: position of the Tile on the map background
+         *      pos[0]: the Y coordinate of the Tile
+         *      pos[1]: the X coordinate of the Tile
+         */
+        public Tile GetTile(int[] pos)
+        {
+            return background[pos[0], pos[1]];
+        }
+
+        /*
+         * Accessor method for specified Entity in map entities
+         * Input: (int[]) pos: position of the Entity on the map entities
+         *      pos[0]: the Y coordinate of the Entity
+         *      pos[1]: the X coordinate of the Entity
+         */
+        public Entity GetEntity(int[] pos)
+        {
+            return entities[pos[0], pos[1]];
+        }
+
+        /*
+         * Mutator method that sets an Entity's position on the Map entities
+         * Input: (Entity) entity: the desired entity to be placed in Map entities
+         * Input: (int[]) pos: position of the Entity on the map entities
+         *      pos[0]: the Y coordinate of the Entity
+         *      pos[1]: the X coordinate of the Entity
+         */
+        public void AddEntity(Entity entity, int[] pos)
+        {
+            entities[pos[0], pos[1]] = entity;
+        }
+
+        /*
+         * Mutator method that removes an Entity from the Map entities
+         * Input: (int[]) pos: position of the Entity on the map entities
+         *      pos[0]: the Y coordinate of the Entity
+         *      pos[1]: the X coordinate of the Entity
+         */
+        public void RemoveEntity(int[] pos)
+        {
+            entities[pos[0], pos[1]] = null;
+        }
     }
 }

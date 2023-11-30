@@ -14,6 +14,9 @@ namespace TextRPG
          * Last Updated: 2023-11-28
          */
 
+        //object references
+        private Map* mapPointer;
+
         //Entity variables
         private string name;
         private Size size;
@@ -77,6 +80,44 @@ namespace TextRPG
             chaMod = getMod(cha);
 
             maxHp = calcMaxHp();
+        }
+
+        /*
+         * Method that moves an entity in the map
+         * Input: (Map) map: the map that the Entity is on
+         * Input: (int[]) startPos: the starting position of the moving Entity on the map
+         *      startPos[0]: the Y coordinate of the Entity's starting position
+         *      startPos[1]: the X coordinate of the Entity's starting position
+         * Input: (int[]) endPos: the desired ending position of the moving Entity
+         *      endPos[0]: the Y coordinate of the Entity's desired end position
+         *      endPos[1]: the X coordinate of the Entity's desired end position
+         */
+        public void Move(Map map, int[] startPos, int[] endPos)
+        {
+            //check desired position if within bounds of map
+            if (endPos[0] < 0 || endPos[0] >= map.GetHeight() || endPos[1] < 0 || endPos[1] >= map.GetWidth())
+            {
+                return; //fail to move
+            }
+
+            //checks if there is an Entity to attack
+            else if (map.GetEntity(endPos) != null)
+            {
+                Attack(map.GetEntity(endPos)); //attacks entity
+            }
+
+            //check if Tile is impassable
+            else if (map.GetTile(endPos).GetImpassable())
+            {
+                return; //fail to move
+            }
+
+            //moves
+            else
+            {
+                map.AddEntity(map.GetEntity(startPos), endPos); //puts entity into new location
+                map.RemoveEntity(startPos); //removes entity from old location
+            }
         }
 
         /*
