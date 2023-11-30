@@ -14,9 +14,6 @@ namespace TextRPG
          * Last Updated: 2023-11-28
          */
 
-        //object references
-        private Map* mapPointer;
-
         //Entity variables
         private string name;
         private Size size;
