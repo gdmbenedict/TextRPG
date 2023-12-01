@@ -11,7 +11,6 @@ namespace TextRPG
 
         public Enemy(string name, Size size, int str, int dex, int con, int itl, int wis, int cha, int luc) : base(name, 'E', size, str, dex, con, itl, wis, cha, luc)
         {
-            //sets color of the player to yellow
             base.SetColor(ConsoleColor.Red);
         }
 

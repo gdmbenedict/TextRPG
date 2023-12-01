@@ -51,9 +51,14 @@ namespace TextRPG
                         index[0] = i;
                         index[1] = j;
 
-                        if (map.GetEntity(index) != null && !map.GetEntity(index).TookTurn())
+                        if (map.GetEntity(index) != null && !map.GetEntity(index).TookTurn() && map.GetEntity(index).GetHp() > 0)
                         {
                             gameOver = map.GetEntity(index).ChooseMove(map, index);
+                        }
+
+                        if (map.GetEntity(index) != null && map.GetEntity(index).GetHp() <= 0)
+                        {
+                            map.RemoveEntity(index);
                         }
 
                     }

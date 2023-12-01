@@ -67,9 +67,8 @@ namespace TextRPG
 
             //setting default color
             color = ConsoleColor.Gray;
-
             //Getting derived values
-            currentHp = maxHp;
+            
             strMod = getMod(str);
             dexMod = getMod(dex);
             conMod = getMod(con);
@@ -78,6 +77,7 @@ namespace TextRPG
             chaMod = getMod(cha);
 
             maxHp = calcMaxHp();
+            currentHp = maxHp;
 
             tookTurn = false;
         }
