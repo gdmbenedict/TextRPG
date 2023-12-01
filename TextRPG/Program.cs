@@ -31,6 +31,11 @@ namespace TextRPG
             //adding player to map
             map.AddEntity(new Player("player", Size.medium, 14, 14, 14 ,14 ,14, 14, 14), pos);
 
+            pos[0] = 8; 
+            pos[1] = 8;
+
+            map.AddEntity(new Enemy("testEnemy", Size.medium, 8, 8, 8, 8, 8, 8, 8), pos);
+
             map.PrintMap(0,0);
 
             bool gameOver = false;
