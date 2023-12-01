@@ -94,6 +94,12 @@ namespace TextRPG
          */
         public void Move(Map map, int[] startPos, int[] endPos)
         {
+            //deal damage to player standing on dangerous tile
+            if (map.GetTile(startPos).GetDangerous())
+            {
+                map.GetTile(startPos).DealDamage(this);
+            }
+
             //check desired position if within bounds of map
             if (endPos[0] < 0 || endPos[0] >= map.GetHeight() || endPos[1] < 0 || endPos[1] >= map.GetWidth())
             {
