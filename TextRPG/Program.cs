@@ -37,8 +37,8 @@ namespace TextRPG
             //adding player to map
             map.AddEntity(new Player("player", Size.medium, 14, 14, 14 ,14 ,14, 14, 14), pos);
 
-            playerHealth = map.GetEntity(pos).GetHp();
-            playerMaxHealth = map.GetEntity(pos).GetMaxHp();
+            playerHealth = map.GetEntity(pos).health.GetHp();
+            playerMaxHealth = map.GetEntity(pos).health.GetMaxHp();
 
             //settinh enemy
             pos[0] = 8; 
@@ -62,15 +62,10 @@ namespace TextRPG
                         index[0] = i;
                         index[1] = j;
 
-                        if (map.GetEntity(index) != null && !map.GetEntity(index).TookTurn() && map.GetEntity(index).GetHp() > 0)
+                        if (map.GetEntity(index) != null && !map.GetEntity(index).TookTurn() && map.GetEntity(index).health.GetHp() > 0)
                         {
                             //bool allows player to exit game with escape
                             gameOver = map.GetEntity(index).ChooseMove(map, index);
-                        }
-
-                        if (map.GetEntity(index) != null && map.GetEntity(index).GetHp() <= 0)
-                        {
-                            map.RemoveEntity(index);
                         }
 
                     }
@@ -89,13 +84,28 @@ namespace TextRPG
                         if (entity.GetName() == "player")
                         {
                             playerAlive = true;
-                            playerHealth = entity.GetHp();
+                            playerHealth = entity.health.GetHp();
                         }
 
                         if (entity.GetName() == "testEnemy")
                         {
                             remainingEnemies++;
                         }
+                    }
+                }
+
+                for (int i = 0; i < map.GetHeight(); i++)
+                {
+                    for (int j = 0; j < map.GetWidth(); j++)
+                    {
+                        index[0] = i;
+                        index[1] = j;
+
+                        if (map.GetEntity(index) != null && map.GetEntity(index).health.GetHp() <= 0)
+                        {
+                            map.RemoveEntity(index);
+                        }
+
                     }
                 }
 

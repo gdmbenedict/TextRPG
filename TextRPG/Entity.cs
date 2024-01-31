@@ -11,7 +11,7 @@ namespace TextRPG
         /*
          * Class for a Entity object in an text based RPG.
          * Author: Matthieu Benedict
-         * Last Updated: 2023-11-29
+         * Last Updated: 2024-01-31
          */
 
         //Entity variables
@@ -19,8 +19,7 @@ namespace TextRPG
         private Size size;
         private ConsoleColor color;
         private char symbol;
-        private int maxHp;
-        private int currentHp;
+        public Health health;
         private int str;
         private int strMod;
         private int dex;
@@ -76,8 +75,7 @@ namespace TextRPG
             wisMod = getMod(wis);
             chaMod = getMod(cha);
 
-            maxHp = calcMaxHp();
-            currentHp = maxHp;
+            health = new Health(conMod);
 
             tookTurn = false;
         }
@@ -94,11 +92,6 @@ namespace TextRPG
          */
         public void Move(Map map, int[] startPos, int[] endPos)
         {
-            //deal damage to player standing on dangerous tile
-            if (map.GetTile(startPos).GetDangerous())
-            {
-                map.GetTile(startPos).DealDamage(this);
-            }
 
             //check desired position if within bounds of map
             if (endPos[0] < 0 || endPos[0] >= map.GetHeight() || endPos[1] < 0 || endPos[1] >= map.GetWidth())
@@ -121,6 +114,12 @@ namespace TextRPG
             //moves
             else
             {
+                //deal damage to player standing on dangerous tile
+                if (map.GetTile(endPos).GetDangerous())
+                {
+                    map.GetTile(endPos).DealDamage(this);
+                }
+
                 map.AddEntity(map.GetEntity(startPos), endPos); //puts entity into new location
                 map.RemoveEntity(startPos); //removes entity from old location
             }
@@ -156,7 +155,7 @@ namespace TextRPG
          */
         public void TakeDamage(int[] damageDetails)
         {
-            currentHp -= damageDetails[0];
+            health.ModHp(-damageDetails[0]);
         }
 
         /*
@@ -229,76 +228,6 @@ namespace TextRPG
         public Size GetSize()
         {
             return size;
-        }
-
-        /*
-         * Mutator method that sets the maximum hit points of an Entity
-         * Input: (int) maxHp: the maximum hit points of an Entity
-         */
-        public void SetMaxHp(int maxHp)
-        {
-            int gapHp = this.maxHp - currentHp;
-            this.maxHp = maxHp;
-            currentHp = this.maxHp - gapHp;
-
-            //sets current hp to 1 if changing maxHp would bring Entity's current Hp to less than 1 
-            if (currentHp < 1 && maxHp >= 1)
-            {
-                currentHp = 1;
-            }
-        }
-
-        /*
-         * Mutator method that modifies the maximum hit points of an Entity by a specified amount
-         * Input: (int) maxHpMod: the amount by which the maximum hp is modified
-         */
-        public void ModMaxHp(int maxHpMod)
-        {
-            int gapHp = this.maxHp - currentHp;
-            maxHp += maxHpMod;
-            currentHp = this.maxHp - gapHp;
-
-            //sets current hp to 1 if changing maxHp would bring Entity's current Hp to less than 1 
-            if (currentHp < 1 && maxHp >= 1)
-            {
-                currentHp = 1;
-            }
-        }
-
-        /*
-         * Accessor method that returns the maximum hit points of an Entity
-         * Output: (int) maxHp: the maximum hit points of an Entity
-         */
-        public int GetMaxHp()
-        {
-            return maxHp;
-        }
-
-        /*
-         * Mutator method that sets the current hit points of the Entity
-         * Input: (int) hp: the current hit points of the Entity
-         */
-        public void SetHp(int hp)
-        {
-            currentHp = hp;
-        }
-
-        /*
-         * Mutator method that modifies the current hit points of the Entity by a spcified amount
-         * Input: (int) modHp: the amount by which current hit of the Entity are modified
-         */
-        public void ModHp(int modHp)
-        {
-            currentHp += modHp;
-        }
-
-        /*
-         * Accessor method that returns the current hit points of the Entity
-         * Output: (int) currentHp: the current hit points of the Entity
-         */
-        public int GetHp()
-        {
-            return currentHp;
         }
 
         /*
@@ -385,9 +314,6 @@ namespace TextRPG
         {
             this.con = con;
             conMod = getMod(this.con);
-
-            //changing Hp to match
-            SetMaxHp(calcMaxHp());
         }
 
         /*
@@ -398,9 +324,6 @@ namespace TextRPG
         {
             con += modCon;
             conMod = getMod(con);
-
-            //changing Hp to match
-            SetMaxHp(calcMaxHp());
         }
 
         /*
@@ -590,14 +513,6 @@ namespace TextRPG
         private int getMod(int stat)
         {
             return (int)((stat-10)/2);
-        }
-
-        /*
-         * utility method that calculates the max hit points of an Entity
-         */
-        private int calcMaxHp()
-        {
-            return 10 + conMod;
         }
     }
 }
