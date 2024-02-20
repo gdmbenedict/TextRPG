@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enemy.cs" />
-    <Compile Include="Health.cs" />
+    <Compile Include="HealthSystem.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="SharedEnums.cs" />
     <Compile Include="Entity.cs" />
@@ -52,6 +52,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stat.cs" />
+    <Compile Include="StatBlock.cs" />
     <Compile Include="Tile.cs" />
   </ItemGroup>
   <ItemGroup>

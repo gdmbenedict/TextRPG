@@ -11,6 +11,7 @@ namespace TextRPG
         private int trueStat; //actual stat value of a game object
         private int currentStat; //current stat value, used for calculations
         private int maxStat; //max stat value that can be naturally achieve
+        private int minStat =1; //always set to 1
         private int statMod; //the modifier value of the stat used for calculations
         private bool unsynched; //bool that tracks if the stat value is synched (true == current)
         private bool uncapped; //bool tracking if the stat is beholdent to its max value
@@ -22,6 +23,12 @@ namespace TextRPG
         /// <param name="maxStatValue">the maximum value of the stat</param>
         public Stat(int statValue, int maxStatValue)
         {
+
+            if (statValue < minStat)
+            {
+                statValue = minStat;
+            }
+
             trueStat = statValue;
             maxStat = maxStatValue;
 
@@ -38,6 +45,11 @@ namespace TextRPG
         /// <param name="statValue">the value of the sta</param>
         public Stat(int statValue)
         {
+            if (statValue < minStat)
+            {
+                statValue = minStat;
+            }
+
             trueStat = statValue;
             maxStat = 20;
 
@@ -90,6 +102,11 @@ namespace TextRPG
         {
             trueStat = statValue;
 
+            if (trueStat < minStat)
+            {
+                trueStat = minStat;
+            }
+
             if (!unsynched)
             {
                 SetCurrentStat(trueStat);
@@ -103,6 +120,11 @@ namespace TextRPG
         public void ModTrueStat(int statModification)
         {
             trueStat += statModification;
+
+            if (trueStat < minStat)
+            {
+                trueStat = minStat;
+            }
 
             if (!unsynched)
             {
@@ -127,6 +149,11 @@ namespace TextRPG
         {
             currentStat = statValue;
 
+            if (currentStat < minStat)
+            {
+                currentStat = minStat;
+            }
+
             if(currentStat > maxStat && !uncapped)
             {
                 currentStat = maxStat;
@@ -142,6 +169,11 @@ namespace TextRPG
         public void ModCurrentStat(int statModification)
         {
             currentStat += statModification;
+
+            if (currentStat < minStat)
+            {
+                currentStat = minStat;
+            }
 
             if (currentStat > maxStat && !uncapped)
             {
@@ -168,6 +200,11 @@ namespace TextRPG
         {
             maxStat = maxStatValue;
 
+            if(maxStat < minStat)
+            {
+                maxStat = minStat;
+            }
+
             if (!unsynched)
             {
                 SetCurrentStat(trueStat);
@@ -186,6 +223,11 @@ namespace TextRPG
         public void ModMaxStat(int maxStatModification)
         {
             maxStat += maxStatModification;
+
+            if (maxStat < minStat)
+            {
+                maxStat = minStat;
+            }
 
             if (!unsynched)
             {
