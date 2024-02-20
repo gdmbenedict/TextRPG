@@ -19,7 +19,7 @@ namespace TextRPG
         private Size size;
         private ConsoleColor color;
         private char symbol;
-        public Health health;
+        public HealthSystem health;
         private int str;
         private int strMod;
         private int dex;
@@ -75,7 +75,7 @@ namespace TextRPG
             wisMod = getMod(wis);
             chaMod = getMod(cha);
 
-            health = new Health(conMod);
+            health = new HealthSystem(conMod);
 
             tookTurn = false;
         }

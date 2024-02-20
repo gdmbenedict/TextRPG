@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TextRPG
 {
-    internal class Health
+    internal class HealthSystem
     {
         /*
          * Class to handle the health of an gameObject
@@ -23,7 +23,7 @@ namespace TextRPG
          * Input: (int) healthMod: the health modifier value of object
          * Output: (Health) health: a health object
          */
-        public Health(int healthMod)
+        public HealthSystem(int healthMod)
         {
             maxHp = healthMod + 10;
             currentHp = maxHp;

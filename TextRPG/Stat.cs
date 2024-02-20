@@ -8,12 +8,18 @@ namespace TextRPG
 {
     internal class Stat
     {
-        private int trueStat; //actual stat value of a creature
+        private int trueStat; //actual stat value of a game object
         private int currentStat; //current stat value, used for calculations
         private int maxStat; //max stat value that can be naturally achieve
         private int statMod; //the modifier value of the stat used for calculations
         private bool unsynched; //bool that tracks if the stat value is synched (true == current)
+        private bool uncapped; //bool tracking if the stat is beholdent to its max value
 
+        /// <summary>
+        /// Consturctor method for a stat.
+        /// </summary>
+        /// <param name="statValue">the value of the stat</param>
+        /// <param name="maxStatValue">the maximum value of the stat</param>
         public Stat(int statValue, int maxStatValue)
         {
             trueStat = statValue;
@@ -23,8 +29,28 @@ namespace TextRPG
             statMod = CalcStatMod(currentStat);
 
             unsynched = false;
+            uncapped = false;
         }
 
+        /// <summary>
+        /// Polymorphic constructor for a stat, requiring only the stat value.
+        /// </summary>
+        /// <param name="statValue">the value of the sta</param>
+        public Stat(int statValue)
+        {
+            trueStat = statValue;
+            maxStat = 20;
+
+            currentStat = trueStat;
+            statMod = CalcStatMod(currentStat);
+
+            unsynched = false;
+            uncapped = false;
+        }
+
+        /// <summary>
+        /// Polymorphic contructor for a stat requiring no inputs
+        /// </summary>
         public Stat()
         {
             trueStat = 10;
@@ -32,84 +58,188 @@ namespace TextRPG
 
             currentStat = trueStat;
             statMod = CalcStatMod(currentStat);
-        }
-    
 
+            unsynched = false;
+            uncapped = false;
+        }
+
+        /// <summary>
+        /// Utility function that returns the stat mod for a stat
+        /// </summary>
+        /// <param name="statValue">current stat value, used for calculations</param>
+        /// <returns>the modifier value of the stat used for calculations</returns>
         private int CalcStatMod(int statValue)
         {
             return statValue - 10 / 2;
         }
 
-        public int getTrueStat()
+        /// <summary>
+        /// Accessor method for the true value of a stat
+        /// </summary>
+        /// <returns>actual stat value of a game object</returns>
+        public int GetTrueStat()
         {
             return trueStat;
         }
 
-        public void setTrueStat(int statValue)
+        /// <summary>
+        /// Mutator method for the true value of a stat
+        /// </summary>
+        /// <param name="statValue">intended value for the true stat</param>
+        public void SetTrueStat(int statValue)
         {
             trueStat = statValue;
 
             if (!unsynched)
             {
-                setCurrentStat(trueStat);
+                SetCurrentStat(trueStat);
             }
         }
 
-        public void modTrueStat(int statModification)
+        /// <summary>
+        /// Mutator method for the true value of a stat
+        /// </summary>
+        /// <param name="statModification">integer value by which the true stat of a game object will be modified</param>
+        public void ModTrueStat(int statModification)
         {
             trueStat += statModification;
 
             if (!unsynched)
             {
-                setCurrentStat(trueStat);
+                SetCurrentStat(trueStat);
             }
         }
 
-        public int getCurrentStat()
+        /// <summary>
+        /// Accessor method for the current value of a stat
+        /// </summary>
+        /// <returns>the current value (used for calculations) of a stat</returns>
+        public int GetCurrentStat()
         {
             return currentStat;
         }
 
-        public void setCurrentStat(int statValue)
+        /// <summary>
+        /// Mutator method for the current value of a stat
+        /// </summary>
+        /// <param name="statValue">the intended value for the current value (used for calculations) of a stat</param>
+        public void SetCurrentStat(int statValue)
         {
             currentStat = statValue;
 
+            if(currentStat > maxStat && !uncapped)
+            {
+                currentStat = maxStat;
+            }
+
             statMod = CalcStatMod(currentStat);
         }
 
-        public void modCurrentStat(int statModification)
+        /// <summary>
+        /// Mutator method for the current value of a stat
+        /// </summary>
+        /// <param name="statModification">integer vlaue by which the current value of the stat will be modified</param>
+        public void ModCurrentStat(int statModification)
         {
             currentStat += statModification;
 
+            if (currentStat > maxStat && !uncapped)
+            {
+                currentStat = maxStat;
+            }
+
             statMod = CalcStatMod(currentStat);
         }
 
-        public int getMaxStat()
+        /// <summary>
+        /// Accessor method for the maximum value of a stat
+        /// </summary>
+        /// <returns>max stat value that can be naturally achieve</returns>
+        public int GetMaxStat()
         {
             return maxStat;
         }
 
-        public void setMaxStat(int maxStatValue)
+        /// <summary>
+        /// Mutator method for the maximum value of a stat
+        /// </summary>
+        /// <param name="maxStatValue">the intended maximum value of the stat</param>
+        public void SetMaxStat(int maxStatValue)
         {
             maxStat = maxStatValue;
+
+            if (!unsynched)
+            {
+                SetCurrentStat(trueStat);
+            }
+
+            if (currentStat > maxStat && !uncapped)
+            {
+                SetCurrentStat(maxStat);
+            }
         }
 
-        public void modMaxStat(int maxStatModification)
+        /// <summary>
+        /// Mutator method for the maximum value of a stat
+        /// </summary>
+        /// <param name="maxStatModification">integer value by which the maximum value for the stat will be modified</param>
+        public void ModMaxStat(int maxStatModification)
         {
             maxStat += maxStatModification;
+
+            if (!unsynched)
+            {
+                SetCurrentStat(trueStat);
+            }
+
+            if (currentStat > maxStat && !uncapped)
+            {
+                SetCurrentStat(maxStat);
+            }
         }
 
-        public void unsynchStat()
+        /// <summary>
+        /// Mutator method the unsychs the true stat and the current class
+        /// </summary>
+        public void UnsynchStat()
         {
             unsynched = true;
         }
 
-        public void sychStat()
+        /// <summary>
+        /// Mutator method that synchs the true stat and the current stat
+        /// </summary>
+        public void SychStat()
         {
             unsynched = false;
 
-            currentStat = trueStat;
+            SetCurrentStat(trueStat);
         }
 
+        /// <summary>
+        /// Mutator method that disables the maximum value for the stat.
+        /// </summary>
+        public void UncapStat()
+        {
+            uncapped = true;
+
+            if (trueStat > maxStat)
+            {
+                currentStat = trueStat;
+            }
+        }
+
+        /// <summary>
+        /// Mutator method that enables the maximum value for the stat.
+        /// </summary>
+        public void CapStat()
+        {
+            uncapped = false;
+
+            if (currentStat > maxStat)
+            {
+                SetCurrentStat(maxStat);
+            }
+        }
     }
 }
