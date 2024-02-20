@@ -17,12 +17,38 @@ namespace TextRPG
         //Health variables
         private int maxHp;
         private int currentHp;
-        private int trueHP;
+        private int trueHp;
+        private bool unsyched;
 
        
         public HealthSystem(int baseHP, int majorHealthMod, int minorHealthMod, int level)
         {
-         
+            trueHp = CalcHP(baseHP, majorHealthMod, minorHealthMod, level);
+            maxHp = trueHp;
+            currentHp = maxHp;
+
+            unsyched = false;
+        }
+
+        public HealthSystem(int majorHealthMod, int minorHealthMod, int level)
+        {
+            trueHp = CalcHP(10, majorHealthMod, minorHealthMod, level);
+            maxHp = trueHp;
+            currentHp = maxHp;
+        }
+
+        public HealthSystem(int majorHealthMod, int minorHealthMod)
+        {
+            trueHp = CalcHP(10, majorHealthMod, minorHealthMod, 1);
+            maxHp = trueHp;
+            currentHp = maxHp;
+        }
+
+        public HealthSystem(int hp)
+        {
+            trueHp=hp;
+            maxHp = trueHp;
+            currentHp = maxHp;
         }
 
         private int CalcHP(int baseHP, int majorHealthMod, int minorHealthMod, int level)
@@ -91,7 +117,17 @@ namespace TextRPG
 
         public int getTrueHP()
         {
-            return trueHP;
+            return trueHp;
+        }
+
+        public void SetTrueHP()
+        {
+
+        }
+
+        public void ModTrueHp()
+        {
+
         }
 
     }

@@ -21,6 +21,31 @@ namespace TextRPG
         /// </summary>
         /// <param name="statValue">the value of the stat</param>
         /// <param name="maxStatValue">the maximum value of the stat</param>
+        /// <param name="minValue">the minimum value of the stat</param>
+        public Stat(int statValue, int maxStatValue, int minValue)
+        {
+            minStat = minValue;
+
+            if (statValue < minStat)
+            {
+                statValue = minStat;
+            }
+
+            trueStat = statValue;
+            maxStat = maxStatValue;
+
+            currentStat = trueStat;
+            statMod = CalcStatMod(currentStat);
+
+            unsynched = false;
+            uncapped = false;
+        }
+
+        /// <summary>
+        /// Consturctor method for a stat.
+        /// </summary>
+        /// <param name="statValue">the value of the stat</param>
+        /// <param name="maxStatValue">the maximum value of the stat</param>
         public Stat(int statValue, int maxStatValue)
         {
 
