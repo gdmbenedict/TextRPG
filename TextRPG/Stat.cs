@@ -272,6 +272,15 @@ namespace TextRPG
         }
 
         /// <summary>
+        /// Accessor method that returns the stat mod
+        /// </summary>
+        /// <returns>the modifier value of the stat used for calculations</returns>
+        public int GetStatMod()
+        {
+            return statMod;
+        }
+
+        /// <summary>
         /// Mutator method the unsychs the true stat and the current class
         /// </summary>
         public void UnsynchStat()

@@ -20,20 +20,13 @@ namespace TextRPG
         private ConsoleColor color;
         private char symbol;
         public HealthSystem health;
-        private int str;
-        private int strMod;
-        private int dex;
-        private int dexMod;
-        private int con;
-        private int conMod;
-        private int itl;
-        private int itlMod;
-        private int wis;
-        private int wisMod;
-        private int cha;
-        private int chaMod;
-        private int luc;
-        private int lucMod;
+        public Stat str;
+        public Stat dex;
+        public Stat con;
+        public Stat itl;
+        public Stat wis;
+        public Stat cha;
+        public Stat luc;
         private bool tookTurn;
 
         /*
@@ -56,26 +49,17 @@ namespace TextRPG
             this.name = name;
             this.symbol = symbol;
             this.size = size;
-            this.str = str;
-            this.dex = dex;
-            this.con = con;
-            this.itl = itl;
-            this.wis = wis;
-            this.cha = cha;
-            this.luc = luc;
+            this.str = new Stat(str);
+            this.dex = new Stat(dex);
+            this.con = new Stat(con);
+            this.itl = new Stat(itl);
+            this.wis = new Stat(wis);
+            this.cha = new Stat(cha);
 
             //setting default color
             color = ConsoleColor.Gray;
-            //Getting derived values
-            
-            strMod = getMod(str);
-            dexMod = getMod(dex);
-            conMod = getMod(con);
-            itlMod = getMod(itl);
-            wisMod = getMod(wis);
-            chaMod = getMod(cha);
 
-            health = new HealthSystem(conMod);
+            health = new HealthSystem(con);
 
             tookTurn = false;
         }
@@ -141,7 +125,7 @@ namespace TextRPG
         public void Attack(Entity target)
         {
             int damageType = DamageType.bludgeoning.DamageTypeToInt();
-            int damage = 1 * size.SizeToInt() + strMod;
+            int damage = 1 * size.SizeToInt() + str.GetStatMod();
             int[] damageDetails = { damage, damageType };
 
             target.TakeDamage(damageDetails);
@@ -228,291 +212,6 @@ namespace TextRPG
         public Size GetSize()
         {
             return size;
-        }
-
-        /*
-         * Mutator method that sets the strength stat of the Entity
-         * Input: (int) str: the strength stat of the Entity
-         */
-        public void SetStr(int str)
-        {
-            this.str = str;
-            strMod = getMod(this.str);
-        }
-
-        /*
-         * Mutator method that modifies the strength stat of the Entity by a specified amount
-         * Input: (int) modStr: the amount by which the strength of the Entity will be modified
-         */
-        public void ModStr(int modStr)
-        {
-            str += modStr;
-            strMod = getMod(str);
-        }
-
-        /*
-         * Accessor method that returns the strength stat of the Entity
-         * Output: (int) str: the strength stat of the Entity
-         */
-        public int GetStr()
-        {
-            return str;
-        }
-
-        /*
-         * Accessor method that returns the strength modifier of the Entity
-         * Output: (int) strMod: the strength modifier of the Entity
-         */
-        public int GetStrMod()
-        {
-            return strMod;
-        }
-
-        /*
-         * Mutator method that sets the dexterity stat of the Entity
-         * Input: (int) str: the dexterity stat of the Entity
-         */
-        public void SetDex(int dex)
-        {
-            this.dex = dex;
-            dexMod = getMod(this.dex);
-        }
-
-        /*
-         * Mutator method that modifies the dexterity stat of the Entity by a specified amount
-         * Input: (int) modDex: the amount by which the dexterity of the Entity will be modified
-         */
-        public void ModDex(int modDex)
-        {
-            dex += modDex;
-            dexMod = getMod(dex);
-        }
-
-        /*
-         * Accessor method that returns the dexterity stat of the Entity
-         * Output: (int) dex: the dexterity stat of the Entity
-         */
-        public int GetDex()
-        {
-            return dex;
-        }
-
-        /*
-         * Accessor method that returns the dexterity modifier of the Entity
-         * Output: (int) dexMod: the dexterity modifier of the Entity
-         */
-        public int GetDexMod()
-        {
-            return dexMod;
-        }
-
-       /*
-        * Mutator method that sets the constituion stat of the Entity
-        * Input: (int) con: the constituion stat of the Entity
-        */
-        public void SetCon(int con)
-        {
-            this.con = con;
-            conMod = getMod(this.con);
-        }
-
-        /*
-         * Mutator method that modifies the constituion stat of the Entity by a specified amount
-         * Input: (int) modCon: the amount by which the constituion of the Entity will be modified
-         */
-        public void ModCon(int modCon)
-        {
-            con += modCon;
-            conMod = getMod(con);
-        }
-
-        /*
-         * Accessor method that returns the constituion stat of the Entity
-         * Output: (int) con: the constituion stat of the Entity
-         */
-        public int GetCon()
-        {
-            return con;
-        }
-
-        /*
-         * Accessor method that returns the constituion modifier of the Entity
-         * Output: (int) conMod: the constituion modifier of the Entity
-         */
-        public int GetConMod()
-        {
-            return conMod;
-        }
-
-       /*
-        * Mutator method that sets the intelligence stat of the Entity
-        * Input: (int) itl: the intelligence stat of the Entity
-        */
-        public void SetItl(int itl)
-        {
-            this.itl = itl;
-            itlMod = getMod(this.itl);
-        }
-
-        /*
-         * Mutator method that modifies the intelligence stat of the Entity by a specified amount
-         * Input: (int) modItl: the amount by which the intelligence of the Entity will be modified
-         */
-        public void ModItl(int modItl)
-        {
-            itl += modItl;
-            itlMod = getMod(itl);
-        }
-
-        /*
-         * Accessor method that returns the intelligence stat of the Entity
-         * Output: (int) itl: the intelligence stat of the Entity
-         */
-        public int GetItl()
-        {
-            return itl;
-        }
-
-        /*
-         * Accessor method that returns the intelligence modifier of the Entity
-         * Output: (int) itlMod: the intelligence modifier of the Entity
-         */
-        public int GetItlMod()
-        {
-            return itlMod;
-        }
-
-       /*
-        * Mutator method that sets the wisdom stat of the Entity
-        * Input: (int) wis: the wisdom stat of the Entity
-        */
-        public void SetWis(int wis)
-        {
-            this.wis = wis;
-            wisMod = getMod(this.wis);
-        }
-
-        /*
-         * Mutator method that modifies the wisdom stat of the Entity by a specified amount
-         * Input: (int) modWis: the amount by which the wisdom of the Entity will be modified
-         */
-        public void ModWis(int modWis)
-        {
-            wis += modWis;
-            wisMod = getMod(wis);
-        }
-
-        /*
-         * Accessor method that returns the wisdom stat of the Entity
-         * Output: (int) wis: the wisdom stat of the Entity
-         */
-        public int GetWis()
-        {
-            return wis;
-        }
-
-        /*
-         * Accessor method that returns the wisdom modifier of the Entity
-         * Output: (int) wisMod: the wisdom modifier of the Entity
-         */
-        public int GetWisMod()
-        {
-            return wisMod;
-        }
-
-       /*
-        * Mutator method that sets the charisma stat of the Entity
-        * Input: (int) cha: the charisma stat of the Entity
-        */
-        public void SetCha(int cha)
-        {
-            this.cha = cha;
-            chaMod = getMod(this.cha);
-        }
-
-        /*
-         * Mutator method that modifies the charisma stat of the Entity by a specified amount
-         * Input: (int) modCha: the amount by which the charisma of the Entity will be modified
-         */
-        public void ModCha(int modCha)
-        {
-            cha += modCha;
-            chaMod = getMod(cha);
-        }
-
-        /*
-         * Accessor method that returns the charisma stat of the Entity
-         * Output: (int) cha: the charisma stat of the Entity
-         */
-        public int GetCha()
-        {
-            return cha;
-        }
-
-        /*
-         * Accessor method that returns the charisma modifier of the Entity
-         * Output: (int) chaMod: the charisma modifier of the Entity
-         */
-        public int GetChaMod()
-        {
-            return chaMod;
-        }
-
-        /*
-         * Mutator method that sets the luck stat of the Entity
-         * Input: (int) luc: the luck stat of the Entity
-         */
-        public void SetLuc(int luc)
-        {
-            this.luc = luc;
-            lucMod = getMod(this.luc);
-        }
-
-        /*
-         * Mutator method that modifies the luck stat of the Entity by a specified amount
-         * Input: (int) modLuc: the amount by which the luck of the Entity will be modified
-         */
-        public void ModLuc(int modLuc)
-        {
-            luc += modLuc;
-            lucMod = getMod(luc);
-        }
-
-        /*
-         * Accessor method that returns the luck stat of the Entity
-         * Output: (int) luc: the luck stat of the Entity
-         */
-        public int GetLuc()
-        {
-            return luc;
-        }
-
-        /*
-         * Accessor method that returns the luck modifier of the Entity
-         * Output: (int) lucMod: the luck modifier of the Entity
-         */
-        public int GetLucMod()
-        {
-            return lucMod;
-        }
-
-        public void clearTurn()
-        {
-            tookTurn = false;
-        }
-
-        public bool TookTurn()
-        {
-            return tookTurn;
-        }
-
-        /*
-         * Utility method that calculates the modifier for a stat based on the stat
-         * Input: (int) stat: that base stat for the modifier
-         */
-        private int getMod(int stat)
-        {
-            return (int)((stat-10)/2);
         }
     }
 }
