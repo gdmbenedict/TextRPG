@@ -8,6 +8,12 @@ namespace TextRPG
 {
     internal class Stat
     {
+        /*
+         * Class to handle a stat game object
+         * Author: Matthieu Benedict
+         * Last Updated: 2024-02-21
+         */
+
         private int trueStat; //actual stat value of a game object
         private int currentStat; //current stat value, used for calculations
         private int maxStat; //max stat value that can be naturally achieve
