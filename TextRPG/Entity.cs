@@ -15,35 +15,39 @@ namespace TextRPG
          */
 
         //Entity variables
-        private string name;
-        private Size size;
-        private ConsoleColor color;
-        private char symbol;
+        private string name; //the name of the Entity
+        private Size size; //the size of the Entity
+        private ConsoleColor color; //color of the Entity respresentation
+        private char symbol; //the graphical representation of the Entity
+
+        //Stats and attributes
         public HealthSystem health;
-        public Stat str;
-        public Stat dex;
-        public Stat con;
-        public Stat itl;
-        public Stat wis;
-        public Stat cha;
-        public Stat luc;
+        public Stat str; //the strength stat of the Entity
+        public Stat dex; //the dexterity stat of the Entity
+        public Stat con; //the constitution stat of the Entity
+        public Stat itl; //the intelligence stat of the Entity
+        public Stat wis; //the wisdom stat of the Entity
+        public Stat cha; //the charisma stat of the Entity
+        public Stat luc; //the luck stat if the Entity
+        public bool[] resistances; //damage type resistances of the Entity
+
         private bool tookTurn;
 
-        /*
-         * Constructor method for an abstract Entity object
-         * Input: (string) name: the name of the Entity
-         * Input: (char) symbol: the graphical representation of the Entity
-         * Input: (Size) size: the size of the Entity
-         * Input: (int) str: the strength stat of the Entity
-         * Input: (int) dex: the dexterity stat of the Entity
-         * Input: (int) con: the constitution stat of the Entity
-         * Input: (int) itl: the intelligence stat of the Entity
-         * Input: (int) wis: the wisdom stat of the Entity
-         * Input: (int) cha: the charisma stat of the Entity
-         * Input: (int) luc: the luck stat if the Entity
-         * Output: (Entity) entity: an object of type Entity
-         */
-        public Entity(string name, char symbol, Size size, int str, int dex, int con, int itl, int wis, int cha, int luc) 
+        /// <summary>
+        /// Constructor for an Entity
+        /// </summary>
+        /// <param name="name">the name of the Entity</param>
+        /// <param name="symbol">the graphical representation of the Entity</param>
+        /// <param name="size">the size of the Entity</param>
+        /// <param name="str">the strength stat of the Entity</param>
+        /// <param name="dex">the dexterity stat of the Entity</param>
+        /// <param name="con">the constitution stat of the Entity</param>
+        /// <param name="itl">the intelligence stat of the Entity</param>
+        /// <param name="wis">the wisdom stat of the Entity</param>
+        /// <param name="cha">the charisma stat of the Entity</param>
+        /// <param name="luc">the luck stat if the Entity</param>
+        /// <param name="resistances">damage type resistances of the Entity</param>
+        public Entity(string name, char symbol, Size size, int str, int dex, int con, int itl, int wis, int cha, int luc, bool[] resistances) 
         { 
             //setting entity variables
             this.name = name;
@@ -55,6 +59,7 @@ namespace TextRPG
             this.itl = new Stat(itl);
             this.wis = new Stat(wis);
             this.cha = new Stat(cha);
+            this.luc = new Stat(luc);
 
             //setting default color
             color = ConsoleColor.Gray;
@@ -62,6 +67,45 @@ namespace TextRPG
             health = new HealthSystem(con);
 
             tookTurn = false;
+
+            this.resistances = resistances;
+        }
+
+        /// <summary>
+        /// Polymorphic constructor for an Entity that doesn't specify resistances
+        /// </summary>
+        /// <param name="name">the name of the Entity</param>
+        /// <param name="symbol">the graphical representation of the Entity</param>
+        /// <param name="size">the size of the Entity</param>
+        /// <param name="str">the strength stat of the Entity</param>
+        /// <param name="dex">the dexterity stat of the Entity</param>
+        /// <param name="con">the constitution stat of the Entity</param>
+        /// <param name="itl">the intelligence stat of the Entity</param>
+        /// <param name="wis">the wisdom stat of the Entity</param>
+        /// <param name="cha">the charisma stat of the Entity</param>
+        /// <param name="luc">the luck stat if the Entity</param>
+        public Entity(string name, char symbol, Size size, int str, int dex, int con, int itl, int wis, int cha, int luc)
+        {
+            //setting entity variables
+            this.name = name;
+            this.symbol = symbol;
+            this.size = size;
+            this.str = new Stat(str);
+            this.dex = new Stat(dex);
+            this.con = new Stat(con);
+            this.itl = new Stat(itl);
+            this.wis = new Stat(wis);
+            this.cha = new Stat(cha);
+            this.luc = new Stat(luc);
+
+            //setting default color
+            color = ConsoleColor.Gray;
+
+            health = new HealthSystem(con);
+
+            tookTurn = false;
+
+            resistances = new bool[13];
         }
 
         /*
@@ -122,14 +166,8 @@ namespace TextRPG
          *      damageDetails[0] = damage value
          *      damageDetails[1] = damage type
          */
-        public void Attack(Entity target)
-        {
-            int damageType = DamageType.bludgeoning.DamageTypeToInt();
-            int damage = 1 * size.SizeToInt() + str.GetStatMod();
-            int[] damageDetails = { damage, damageType };
-
-            target.TakeDamage(damageDetails);
-        }
+        public abstract void Attack(Entity target);
+        
 
         /*
          * Method that takes damageDetails and does damage to the Entity
@@ -139,6 +177,12 @@ namespace TextRPG
          */
         public void TakeDamage(int[] damageDetails)
         {
+            //checks if resistant to damage
+            if (resistances[damageDetails[1]])
+            {
+                damageDetails[0] /= 2; //halves damage
+            }
+
             health.ModHp(-damageDetails[0]);
         }
 
@@ -212,6 +256,11 @@ namespace TextRPG
         public Size GetSize()
         {
             return size;
+        }
+
+        public bool TookTurn()
+        {
+            return tookTurn;
         }
     }
 }
