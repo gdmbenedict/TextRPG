@@ -15,6 +15,7 @@ namespace TextRPG
     internal abstract class Equipment : Item
     {
         private EquipmentSlotType slotType; //The slot type of the equipment
+        private Size equipmentSize; //The size category of the equipment
         private float dodgeChance; //dodge chance modified by this equipment
         private int[] damageReductions; //the reduction in damage applied by the equipment (indexed by Int damage types)
         private int damage; //damage done by Equipment
@@ -66,6 +67,24 @@ namespace TextRPG
         public void SetSlotType(EquipmentSlotType slotType)
         {
             this.slotType = slotType;
+        }
+
+        /// <summary>
+        /// Accessor method that returns the size of the Equipment
+        /// </summary>
+        /// <returns>the size of the Equipment</returns>
+        public Size GetEquipmentSize()
+        {
+            return equipmentSize;
+        }
+
+        /// <summary>
+        /// Mutator method that sets the size of the Equipment
+        /// </summary>
+        /// <param name="size">the specified size of the Equipment</param>
+        public void SetEquippmentSize(Size size)
+        {
+            equipmentSize = size;
         }
 
         /// <summary>

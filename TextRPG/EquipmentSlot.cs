@@ -15,6 +15,7 @@ namespace TextRPG
     internal class EquipmentSlot
     {
         private EquipmentSlotType slotType; //the type of slot
+        private Size size;
         private Equipment slot; //the equipped equipment
 
         /// <summary>
@@ -43,6 +44,24 @@ namespace TextRPG
         public void SetSlotType(EquipmentSlotType slotType)
         {
             this.slotType = slotType;
+        }
+
+        /// <summary>
+        /// Accessor method that returns the size of the equipment slot (based on the creature size)
+        /// </summary>
+        /// <returns>size of the equipment slot (based on the creature size)</returns>
+        public Size GetSize()
+        {
+            return size;
+        }
+
+        /// <summary>
+        /// Mutator method that sets the size of the equipment slot (based on the creature size
+        /// </summary>
+        /// <param name="size">specified size of the equipment slot (based on the creature size</param>
+        public void SetSize(Size size)
+        {
+            this.size = size;
         }
 
         /// <summary>

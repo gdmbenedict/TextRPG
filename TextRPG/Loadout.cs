@@ -9,5 +9,10 @@ namespace TextRPG
     internal class Loadout
     {
         private EquipmentSlot[] equipmentSlots;
+
+        public Loadout()
+        {
+
+        }
     }
 }
