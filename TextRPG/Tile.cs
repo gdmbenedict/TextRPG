@@ -23,6 +23,10 @@ namespace TextRPG
         private int damage;
         private DamageType damageType;
 
+        //health system
+        private bool damageable;
+        HealthSystem healthSystem;
+
 
         /*
          * Constructor method for a Tile object
@@ -33,12 +37,13 @@ namespace TextRPG
         {
             /*
              * Legend for tile types:
-             * air      ' '
-             * door     '/'
-             * floor    '.'
-             * lava     'l'
-             * wall     '-' or '|' or '+'
-             * water    'w'
+             * air          ' '
+             * door         '/'
+             * floor        '.'
+             * lava         'l'
+             * wall         '-' or '|' or '+'
+             * water        'w'
+             * deep water   'd'
              */
 
             switch (tileType)
@@ -101,6 +106,15 @@ namespace TextRPG
                     name = "water";
                     color = ConsoleColor.Blue;
                     impassable = false;
+                    dangerous = false;
+                    damage = 0;
+                    damageType = DamageType.cold;
+                    break;
+                case 'd':
+                    symbol = '~';
+                    name = "deep water";
+                    color = ConsoleColor.DarkBlue;
+                    impassable = true;
                     dangerous = false;
                     damage = 0;
                     damageType = DamageType.cold;

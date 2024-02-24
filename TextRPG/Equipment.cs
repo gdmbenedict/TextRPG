@@ -33,10 +33,14 @@ namespace TextRPG
         /// <param name="damage"></param>
         /// <param name="damageType"></param>
         /// <param name="canAttack"></param>
-        public Equipment(string name, float weight, float value, float dodgeChance, int[] damageReductions, int damage, DamageType damageType, bool canAttack) : base(name, weight, value)
+        public Equipment(string name, float weight, float value, EquipmentSlotType slotType, Size size, float dodgeChance, int[] damageReductions, int damage, DamageType damageType, bool canAttack) : base(name, weight, value)
         {
             //setting Item type
             base.SetType(ItemType.equipment);
+
+            //Setting slot type and size
+            this.slotType = slotType;
+            this.equipmentSize = size;
 
             //setting variables for equipment
             this.dodgeChance = dodgeChance;

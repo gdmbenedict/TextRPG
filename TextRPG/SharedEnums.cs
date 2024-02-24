@@ -134,7 +134,7 @@ namespace TextRPG
         waist,
         back,
         arms,
-        hands,
+        hand,
         feet,
         rings
     }

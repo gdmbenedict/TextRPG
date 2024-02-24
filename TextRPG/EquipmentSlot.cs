@@ -22,9 +22,10 @@ namespace TextRPG
         /// Constructor method for a slot for equipment
         /// </summary>
         /// <param name="slotType">the type of slot this slot is</param>
-        public EquipmentSlot(EquipmentSlotType slotType)
+        public EquipmentSlot(EquipmentSlotType slotType, Size size)
         {
             this.slotType = slotType;
+            this.size = size;
             slot = null; //nothing equipped on contruction
         }
 
