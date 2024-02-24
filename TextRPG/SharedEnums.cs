@@ -109,6 +109,9 @@ namespace TextRPG
         undead
     }
 
+    /// <summary>
+    /// Enum to tag the types of Items
+    /// </summary>
     public enum ItemType
     {
         equipment,
@@ -117,5 +120,22 @@ namespace TextRPG
         tool,
         material,
         collectable
+    }
+
+    /// <summary>
+    /// Enum to tag the slot type of a Equipment item
+    /// </summary>
+    public enum EquipmentSlotType
+    {
+        head,
+        eyes,
+        neck,
+        body,
+        waist,
+        back,
+        arms,
+        hands,
+        feet,
+        rings
     }
 }
