@@ -108,4 +108,14 @@ namespace TextRPG
         plant,
         undead
     }
+
+    public enum ItemType
+    {
+        equipment,
+        consumable,
+        ammunition,
+        tool,
+        material,
+        collectable
+    }
 }
