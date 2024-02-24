@@ -37,7 +37,7 @@ namespace TextRPG
         /// Accessor method for the name of the Item
         /// </summary>
         /// <returns>the name of the Item</returns>
-        public string getName()
+        public string GetName()
         {
             return name;
         }
@@ -46,7 +46,7 @@ namespace TextRPG
         /// Mutator method that sets the name of an Item
         /// </summary>
         /// <param name="name">the name of the Item</param>
-        public void setName(string name)
+        public void SetName(string name)
         {
             this.name=name;
         }
@@ -55,7 +55,7 @@ namespace TextRPG
         /// Accessor method that returns the weight of an Item
         /// </summary>
         /// <returns>the weight of the item</returns>
-        public float getWeight()
+        public float GetWeight()
         {
             return weight;
         }
@@ -64,7 +64,7 @@ namespace TextRPG
         /// Mutator method that sets the weight of an Item
         /// </summary>
         /// <param name="weight">the weight of the item</param>
-        public void setWeight(float weight)
+        public void SetWeight(float weight)
         {
             this.weight=weight;
         }
@@ -73,7 +73,7 @@ namespace TextRPG
         /// Accessor method that returns the value of an item
         /// </summary>
         /// <returns>the value of an Item</returns>
-        public float getValue()
+        public float GetValue()
         {
             return value;
         }
@@ -82,7 +82,7 @@ namespace TextRPG
         /// Mutator method that sets the value of an item
         /// </summary>
         /// <param name="value">the value of an Item</param>
-        public void setValue(float value)
+        public void SetValue(float value)
         {
             this.value =value;
         }
@@ -91,7 +91,7 @@ namespace TextRPG
         /// Accessor method that returns the type of the item
         /// </summary>
         /// <returns>the type of the item</returns>
-        public ItemType getType()
+        public ItemType GetType()
         {
             return type;
         }
@@ -100,7 +100,7 @@ namespace TextRPG
         /// Mutator method that sets the type of the item
         /// </summary>
         /// <param name="type">the type of the item</param>
-        public void setType(ItemType type)
+        public void SetType(ItemType type)
         {
             this.type = type;
         }
@@ -109,6 +109,6 @@ namespace TextRPG
         /// Abstract method that triggers the effect of the Item for a given Entity
         /// </summary>
         /// <param name="target">the target Entity of the Item effect</param>
-        public abstract void use(Entity target);
+        public abstract void Use(Entity target);
     }
 }

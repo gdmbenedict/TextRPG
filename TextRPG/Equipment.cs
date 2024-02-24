@@ -15,16 +15,30 @@ namespace TextRPG
     internal abstract class Equipment : Item
     {
         private EquipmentSlotType slotType; //The slot type of the equipment
+        private float dodgeChance;
+        private int[] damageReduction;
+        private int damage;
+        private DamageType damageType;
+        private bool canAttack;
 
-        public Equipment(string name, float weight, float value) : base(name, weight, value)
+        public Equipment(string name, float weight, float value, float dodgeChance, int[] damageReduction, int damage, DamageType damageType, bool canAttack) : base(name, weight, value)
         {
             //setting Item type
-            base.setType(ItemType.equipment);
+            base.SetType(ItemType.equipment);
+
+            //setting variables for equipment
+            this.dodgeChance = dodgeChance;
+            this.damageReduction = damageReduction;
+            this.damage = damage;
+            this.damageType = damageType;
+            this.canAttack = canAttack;
         }
 
         public override void Use(Entity target)
         {
 
         }
+
+        public 
     }
 }

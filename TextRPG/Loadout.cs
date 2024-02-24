@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace TextRPG
 {
-    internal class Weapon
+    internal class Loadout
     {
+        private EquipmentSlot[] equipmentSlots;
     }
 }
