@@ -11,7 +11,7 @@ namespace TextRPG
         /*
          * Class for a Entity object in an text based RPG.
          * Author: Matthieu Benedict
-         * Last Updated: 2024-01-31
+         * Last Updated: 2024-02-23
          */
 
         //Entity variables
@@ -29,7 +29,8 @@ namespace TextRPG
         public Stat wis; //the wisdom stat of the Entity
         public Stat cha; //the charisma stat of the Entity
         public Stat luc; //the luck stat if the Entity
-        public bool[] resistances; //damage type resistances of the Entity
+        private bool[] resistances; //damage type resistances of the Entity
+        private CreatureType creatureType; //The type that the creature is
 
         private bool tookTurn;
 
@@ -53,6 +54,10 @@ namespace TextRPG
             this.name = name;
             this.symbol = symbol;
             this.size = size;
+            color = ConsoleColor.Gray;
+
+            //Stats and Attributes
+            health = null;
             this.str = new Stat(str);
             this.dex = new Stat(dex);
             this.con = new Stat(con);
@@ -60,15 +65,10 @@ namespace TextRPG
             this.wis = new Stat(wis);
             this.cha = new Stat(cha);
             this.luc = new Stat(luc);
-
-            //setting default color
-            color = ConsoleColor.Gray;
-
-            health = new HealthSystem(con);
-
-            tookTurn = false;
-
             this.resistances = resistances;
+
+            //other
+            tookTurn = false;
         }
 
         /// <summary>
@@ -90,6 +90,10 @@ namespace TextRPG
             this.name = name;
             this.symbol = symbol;
             this.size = size;
+            color = ConsoleColor.Gray;
+
+            //Stats and Attributes
+            health = null;
             this.str = new Stat(str);
             this.dex = new Stat(dex);
             this.con = new Stat(con);
@@ -97,15 +101,10 @@ namespace TextRPG
             this.wis = new Stat(wis);
             this.cha = new Stat(cha);
             this.luc = new Stat(luc);
+            this.resistances = new bool[13];
 
-            //setting default color
-            color = ConsoleColor.Gray;
-
-            health = new HealthSystem(con);
-
+            //other
             tookTurn = false;
-
-            resistances = new bool[13];
         }
 
         /*
@@ -256,6 +255,42 @@ namespace TextRPG
         public Size GetSize()
         {
             return size;
+        }
+
+        /// <summary>
+        /// Accessor method that returns the resistances of an Entity
+        /// </summary>
+        /// <returns>damage type resistances of the Entity</returns>
+        public bool[] getResistances()
+        {
+            return resistances;
+        }
+
+        /// <summary>
+        /// Mutator method that sets all resistances of an Entity
+        /// </summary>
+        /// <param name="resistances">damage type resistances of the Entity</param>
+        public void setResistances(bool[] resistances)
+        {
+            this.resistances = resistances;
+        }
+
+        /// <summary>
+        /// Mutator method that adds a single resistance to the list of resistances of an Entity
+        /// </summary>
+        /// <param name="resistanceInt">The DamageType equivilent in int format</param>
+        public void addResistance(int resistanceInt)
+        {
+            resistances[resistanceInt] = true;
+        }
+
+        /// <summary>
+        /// Mutator method that removes a single resistance to the list of resistances of an Entity
+        /// </summary>
+        /// <param name="resistanceInt">The DamageType equivilent in int format</param>
+        public void removeResistance(int resistanceInt)
+        {
+            resistances[resistanceInt] = false;
         }
 
         public bool TookTurn()

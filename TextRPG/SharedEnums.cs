@@ -5,7 +5,7 @@ namespace TextRPG
     /*
      * Code to handle shared enums and thier related functions.
      * Author: Matthieu Benedict
-     * Last Updated: 2023-11-28
+     * Last Updated: 2024-02-23
      */
 
     //damage type enum
@@ -88,5 +88,24 @@ namespace TextRPG
         {
             return (Size)intsize;
         }
+    }
+
+    /// <summary>
+    /// Enum to tag types of creature
+    /// </summary>
+    public enum CreatureType
+    {
+        beast,
+        celestial,
+        construct,
+        demonic,
+        draconic,
+        elemental,
+        fey,
+        humanoid,
+        monstrosity,
+        ooze,
+        plant,
+        undead
     }
 }
