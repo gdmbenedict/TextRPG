@@ -10,6 +10,7 @@ namespace TextRPG
     internal class Loadout
     {
         private List<EquipmentSlot> equipmentSlots;
+        /*
 
         //Basic Constructor for alpha purposes
         public Loadout()
@@ -60,5 +61,7 @@ namespace TextRPG
         {
 
         }
+
+        */
     }
 }

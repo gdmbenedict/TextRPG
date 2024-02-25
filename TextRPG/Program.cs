@@ -65,7 +65,7 @@ namespace TextRPG
                         if (map.GetEntity(index) != null && !map.GetEntity(index).TookTurn() && map.GetEntity(index).health.GetHp() > 0)
                         {
                             //bool allows player to exit game with escape
-                            gameOver = map.GetEntity(index).ChooseMove(map, index);
+                            gameOver = map.GetEntity(index).ChooseAction(map, index);
                         }
 
                     }

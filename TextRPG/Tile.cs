@@ -62,7 +62,7 @@ namespace TextRPG
                     break;
                 //door
                 case '/':
-
+                case '\\':
                     symbol = tileType;
                     name = "door";
                     color = ConsoleColor.White;

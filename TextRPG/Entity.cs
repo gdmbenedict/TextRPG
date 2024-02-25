@@ -32,6 +32,9 @@ namespace TextRPG
         private bool[] resistances; //damage type resistances of the Entity
         private CreatureType creatureType; //The type that the creature is
 
+        //temporary baseline dodge chance
+        private float dodgeChance = 50.0f;
+
         private bool tookTurn;
 
         /// <summary>
@@ -157,7 +160,7 @@ namespace TextRPG
         /*
          * abstract method for choosing movement, based on child
          */
-        public abstract bool ChooseMove(Map map, int[] startPos);
+        public abstract bool ChooseAction(Map map, int[] startPos);
 
         /*
          * Method that sends an attack's damageDetails in the form of an int array
@@ -291,6 +294,11 @@ namespace TextRPG
         public void removeResistance(int resistanceInt)
         {
             resistances[resistanceInt] = false;
+        }
+
+        public float GetDodgeChance()
+        {
+            return dodgeChance;
         }
 
         public bool TookTurn()
