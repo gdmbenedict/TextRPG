@@ -63,7 +63,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Maps\Dungeon.txt" />
+    <Content Include="Maps\Dungeon.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Maps\TestMap.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

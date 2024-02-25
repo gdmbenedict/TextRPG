@@ -18,17 +18,17 @@ namespace TextRPG
             bool playerAlive = true;
 
             //testing map
-            string filename = "TestMap.txt";
+            string filename = "Dungeon.txt";
             string path = Path.Combine(Environment.CurrentDirectory, @"Maps\", filename);
 
             Map map = new Map(path);
 
             int height = map.GetHeight();
             int width = map.GetWidth();
-
+            
             //setting console window settings
-            Console.SetWindowSize(width * 2, height * 2);
-            Console.SetBufferSize(width * 2, height * 2);
+            Console.SetWindowSize(width , height + 10);
+            Console.SetBufferSize(width*2 , height*2 );
             Console.CursorVisible = false;
 
             //setting a player starting position
@@ -40,14 +40,14 @@ namespace TextRPG
             playerHealth = map.GetEntity(pos).health.GetHp();
             playerMaxHealth = map.GetEntity(pos).health.GetMaxHp();
 
-            //settinh enemy
+            //setting enemy
             pos[0] = 8; 
             pos[1] = 8;
 
             map.AddEntity(new Enemy("testEnemy", Size.medium, 8, 8, 8, 8, 8, 8, 8), pos);
 
             map.PrintMap(0,0);
-            printUI(height + 1, playerHealth, playerMaxHealth, remainingEnemies, playerAlive);
+            printUI(height +1, playerHealth, playerMaxHealth, remainingEnemies, playerAlive);
 
             bool gameOver = false;
             int[] index = new int[2];

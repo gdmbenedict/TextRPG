@@ -21,9 +21,9 @@
 |............w......w.+-----...-----+........w...d...d......+-----.-----+...w...+-----.-----+...w.....w...|
 |...w..................................w.........dd.dd......|...w.......|...w...|...........|...w......w..|
 |...................w...........................ddd.ddd.....+-----------+...w...+-----------+...w.........|
-|dddddddddddddddddddddddddddddddddddddddddddddddd.....ddddddddddddddddddd...d...ddddddddddddd...d...dddddd|
+|ddddddddddddd...ddddddddddd...dddddddddddddddddd.....ddddddddddddddddddd...d...ddddddddddddd...d...dddddd|
 |ww................................................>......................................................|
-|dddddddddddddddddddddddddddddddddddddddddddddddd.....ddddddddddddddddddd...d...ddddddddddddd...d...dddddd|
+|ddddddddddddd...ddddddddddd...dddddddddddddddddd.....ddddddddddddddddddd...d...ddddddddddddd...d...dddddd|
 |...............................................ddd.ddd.....+-----------+...w...+-----------+...w.........|
 |...wwwwwwwwwwwwwwwwwwww.........w..........w....dd.dd......|........w..|...w...|...ww......|...w.........|
 |wwwwwwwwwwwwwwwwwwwwwwwwwww.....................d...d....w.+-----.-----+...w...+-----.-----+...w.....w...|

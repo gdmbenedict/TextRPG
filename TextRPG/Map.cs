@@ -54,7 +54,7 @@ namespace TextRPG
 
                 if (input[i] == "}")
                 {
-                    endIndex = i - 1; //sets end of map above clode bracket
+                    endIndex = i -1; //sets end of map above closed bracket
                 }
             }
 
