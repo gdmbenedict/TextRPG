@@ -138,4 +138,10 @@ namespace TextRPG
         feet,
         rings
     }
+
+    public enum BehviourState
+    {
+        passive,
+        aggressive,
+    }
 }

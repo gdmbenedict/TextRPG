@@ -89,5 +89,26 @@ namespace TextRPG
             return false;
 
         }
+
+        public override int[] GetDamage()
+        {
+            int[] damageDetails = new int[2];
+            Random rnd = new Random();
+
+            damageDetails[0] = rnd.Next(4) + str.GetStatMod();
+            damageDetails[1] = DamageType.bludgeoning.DamageTypeToInt();
+
+            if (damageDetails[0] <= 0)
+            {
+                damageDetails[0] = 1;
+            }
+
+            return damageDetails;
+        }
+
+        public override void OnDeath(Map map, int[] pos)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

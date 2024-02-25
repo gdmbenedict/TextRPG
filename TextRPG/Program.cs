@@ -44,7 +44,7 @@ namespace TextRPG
             pos[0] = 8; 
             pos[1] = 8;
 
-            map.AddEntity(new Enemy("testEnemy", Size.medium, 8, 8, 8, 8, 8, 8, 8), pos);
+            map.AddEntity(new Rat(), pos);
 
             map.PrintMap(0,0);
             printUI(height +1, playerHealth, playerMaxHealth, remainingEnemies, playerAlive);
@@ -87,7 +87,7 @@ namespace TextRPG
                             playerHealth = entity.health.GetHp();
                         }
 
-                        if (entity.GetName() == "testEnemy")
+                        if (entity.GetName() != "player")
                         {
                             remainingEnemies++;
                         }

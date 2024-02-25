@@ -110,6 +110,25 @@ namespace TextRPG
             tookTurn = false;
         }
 
+        //empty constructor
+        public Entity()
+        {
+            name = null;
+            symbol = '?';
+            size = Size.medium;
+            color = ConsoleColor.Gray;
+            health = null;
+            str = null;
+            dex = null;
+            con = null; 
+            itl = null;
+            wis = null;
+            cha = null;
+            luc = null;
+            resistances = null;
+
+        }
+
         /*
          * Method that moves an entity in the map
          * Input: (Map) map: the map that the Entity is on
@@ -170,21 +189,19 @@ namespace TextRPG
          */
         public void Attack(Entity target)
         {
-            int[] damageDetails = new int[2];
             Random rnd = new Random();
 
             float attackRoll = (float)(rnd.NextDouble() * 100f) + wis.GetStatMod()*5f + dex.GetMaxStat()*5f;
 
             if (target.GetDodgeChance() < attackRoll)
             {
-                //fill in attacks
-                damageDetails[0] = rnd.Next(4) + str.GetStatMod();
-                damageDetails[1] = DamageType.bludgeoning.DamageTypeToInt();
-            }
-
-            target.TakeDamage(damageDetails);
+                target.TakeDamage(GetDamage());
+            }          
         }
-        
+
+        public abstract int[] GetDamage();
+
+        public abstract void OnDeath(Map map, int[] pos);
 
         /*
          * Method that takes damageDetails and does damage to the Entity
@@ -309,6 +326,16 @@ namespace TextRPG
         public void removeResistance(int resistanceInt)
         {
             resistances[resistanceInt] = false;
+        }
+
+        public CreatureType GetCreatureType()
+        {
+            return creatureType;
+        }
+
+        public void SetCreatureType(CreatureType creatureType)
+        {
+            this.creatureType = creatureType;
         }
 
         public float GetDodgeChance()
