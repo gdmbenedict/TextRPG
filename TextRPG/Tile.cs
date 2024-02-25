@@ -20,6 +20,7 @@ namespace TextRPG
         private ConsoleColor color;
         private bool impassable;
         private bool dangerous;
+        private bool exit;
         private int damage;
         private DamageType damageType;
 
@@ -55,16 +56,19 @@ namespace TextRPG
                     color = ConsoleColor.White;
                     impassable = true;
                     dangerous = false;
+                    exit = false;
                     damage = 0;
                     damageType = DamageType.force;
                     break;
                 //door
                 case '/':
+
                     symbol = tileType;
                     name = "door";
-                    color = ConsoleColor.Gray;
+                    color = ConsoleColor.White;
                     impassable = false;
                     dangerous = false;
+                    exit = false;
                     damage = 0;
                     damageType = DamageType.force;
                     break;
@@ -75,6 +79,7 @@ namespace TextRPG
                     color = ConsoleColor.DarkGray;
                     impassable = false;
                     dangerous = false;
+                    exit = false;
                     damage = 0;
                     damageType = DamageType.force;
                     break;
@@ -85,6 +90,7 @@ namespace TextRPG
                     color = ConsoleColor.DarkRed;
                     impassable = false;
                     dangerous = true;
+                    exit = false;
                     damage = 10;
                     damageType = DamageType.fire;
                     break;
@@ -97,6 +103,7 @@ namespace TextRPG
                     color = ConsoleColor.Gray;
                     impassable = true;
                     dangerous = false;
+                    exit = false;
                     damage = 0;
                     damageType = DamageType.force;
                     break;
@@ -107,17 +114,31 @@ namespace TextRPG
                     color = ConsoleColor.Blue;
                     impassable = false;
                     dangerous = false;
+                    exit = false;
                     damage = 0;
                     damageType = DamageType.cold;
                     break;
+                //deep water
                 case 'd':
                     symbol = '~';
                     name = "deep water";
                     color = ConsoleColor.DarkBlue;
                     impassable = true;
                     dangerous = false;
+                    exit = false;
                     damage = 0;
                     damageType = DamageType.cold;
+                    break;
+                //Exit
+                case '>':
+                    symbol = tileType;
+                    name = "exit";
+                    color = ConsoleColor.White;
+                    impassable = false;
+                    dangerous = false;
+                    exit = true;
+                    damage = 0;
+                    damageType = DamageType.force;
                     break;
                 //unkown
                 default:
@@ -126,6 +147,8 @@ namespace TextRPG
                     color = ConsoleColor.Gray;
                     impassable = false;
                     dangerous = false;
+                    exit = false;
+                    damage = 0;
                     damageType = DamageType.bludgeoning;
                     break;
             }

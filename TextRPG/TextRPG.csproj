@@ -44,8 +44,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enemy.cs" />
+    <Compile Include="Equipment.cs" />
+    <Compile Include="EquipmentSlot.cs" />
     <Compile Include="HealthSystem.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="Loadout.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="SharedEnums.cs" />
     <Compile Include="Entity.cs" />
@@ -59,6 +62,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Maps\Dungeon.txt" />
     <Content Include="Maps\TestMap.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
