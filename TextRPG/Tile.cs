@@ -24,11 +24,6 @@ namespace TextRPG
         private int damage;
         private DamageType damageType;
 
-        //health system
-        private bool damageable;
-        HealthSystem healthSystem;
-
-
         /*
          * Constructor method for a Tile object
          * Input: (char) tileType: character which determines what type of tile is used
@@ -45,6 +40,7 @@ namespace TextRPG
              * wall         '-' or '|' or '+'
              * water        'w'
              * deep water   'd'
+             * exit         '>'
              */
 
             switch (tileType)

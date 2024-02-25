@@ -32,6 +32,8 @@ namespace TextRPG
         {
             //sets color of the player to yellow
             base.SetColor(ConsoleColor.Yellow);
+
+            health = new HealthSystem(10, this.con.GetStatMod(), this.str.GetStatMod(), 1);
         }
 
         /*
@@ -41,7 +43,7 @@ namespace TextRPG
          *      startPos[0]: the Y coordinate of the Entity's starting position
          *      startPos[1]: the X coordinate of the Entity's starting position
          */
-        public override bool ChooseMove(Map map, int[] starPos)
+        public override bool ChooseAction(Map map, int[] starPos)
         {
             //declaring variables
             int[] endPos = { starPos[0], starPos[1] };

@@ -113,7 +113,7 @@ namespace TextRPG
         /// <returns>the modifier value of the stat used for calculations</returns>
         private int CalcStatMod(int statValue)
         {
-            return statValue - 10 / 2;
+            return (statValue - 10) / 2;
         }
 
         /// <summary>

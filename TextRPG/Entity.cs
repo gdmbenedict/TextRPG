@@ -168,7 +168,22 @@ namespace TextRPG
          *      damageDetails[0] = damage value
          *      damageDetails[1] = damage type
          */
-        public abstract void Attack(Entity target);
+        public void Attack(Entity target)
+        {
+            int[] damageDetails = new int[2];
+            Random rnd = new Random();
+
+            float attackRoll = (float)(rnd.NextDouble() * 100f) + wis.GetStatMod()*5f + dex.GetMaxStat()*5f;
+
+            if (target.GetDodgeChance() < attackRoll)
+            {
+                //fill in attacks
+                damageDetails[0] = rnd.Next(4) + str.GetStatMod();
+                damageDetails[1] = DamageType.bludgeoning.DamageTypeToInt();
+            }
+
+            target.TakeDamage(damageDetails);
+        }
         
 
         /*
@@ -304,6 +319,11 @@ namespace TextRPG
         public bool TookTurn()
         {
             return tookTurn;
+        }
+
+        public void clearTurn()
+        {
+            tookTurn = false;
         }
     }
 }

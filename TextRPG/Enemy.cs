@@ -12,9 +12,11 @@ namespace TextRPG
         public Enemy(string name, Size size, int str, int dex, int con, int itl, int wis, int cha, int luc) : base(name, 'E', size, str, dex, con, itl, wis, cha, luc)
         {
             base.SetColor(ConsoleColor.Red);
+
+            health = new HealthSystem(10);
         }
 
-        public override bool ChooseMove(Map map, int[] startPos)
+        public override bool ChooseAction(Map map, int[] startPos)
         {
             int[] endPos = new int[2];
             
