@@ -11,6 +11,8 @@ namespace TextRPG
     {
         static void Main(string[] args)
         {
+            Random rdm = new Random();
+
             //storing some variables for UI
             int playerHealth;
             int playerMaxHealth;
@@ -41,9 +43,25 @@ namespace TextRPG
             playerMaxHealth = map.GetEntity(pos).health.GetMaxHp();
 
             //setting enemy
-            pos[0] = 8; 
-            pos[1] = 8;
+            
+            pos[0] = rdm.Next(20);
+            pos[1] = rdm.Next(20);
+            map.AddEntity(new Rat(), pos);
 
+            pos[0] = rdm.Next(20);
+            pos[1] = rdm.Next(20);
+            map.AddEntity(new Rat(), pos);
+
+            pos[0] = rdm.Next(20);
+            pos[1] = rdm.Next(20);
+            map.AddEntity(new Rat(), pos);
+
+            pos[0] = rdm.Next(20);
+            pos[1] = rdm.Next(20);
+            map.AddEntity(new Rat(), pos);
+
+            pos[0] = rdm.Next(20);
+            pos[1] = rdm.Next(20);
             map.AddEntity(new Rat(), pos);
 
             map.PrintMap(0,0);
@@ -103,6 +121,7 @@ namespace TextRPG
 
                         if (map.GetEntity(index) != null && map.GetEntity(index).health.GetHp() <= 0)
                         {
+                            map.GetEntity(index).OnDeath(map, index);
                             map.RemoveEntity(index);
                         }
 

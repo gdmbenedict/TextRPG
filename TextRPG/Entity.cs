@@ -352,5 +352,7 @@ namespace TextRPG
         {
             tookTurn = false;
         }
+
+        public abstract void specialFunction();
     }
 }

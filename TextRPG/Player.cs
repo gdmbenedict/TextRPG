@@ -110,5 +110,10 @@ namespace TextRPG
         {
             throw new NotImplementedException();
         }
+
+        public override void specialFunction()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

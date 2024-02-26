@@ -21,6 +21,8 @@ namespace TextRPG
 
         }
 
+
+
         public void SetBehaviourState(BehviourState behviourState)
         {
             this.behviourState = behviourState;

@@ -11,24 +11,33 @@ namespace TextRPG
     {
         public Rat() : base()
         {
-            base.SetName("Rat");
-            base.SetSymbol('r');
-            base.SetSize(Size.tiny);
-            base.SetColor(ConsoleColor.Red);
+            SetName("Rat");
+            SetSymbol('r');
+            SetSize(Size.tiny);
+            SetColor(ConsoleColor.Red);
 
-            base.health = new HealthSystem(4);
-            base.str = new Stat(2); 
-            base.dex = new Stat(11);
-            base.con = new Stat(9);
-            base.itl = new Stat(2);
-            base.wis = new Stat(10);
-            base.cha = new Stat(4);
-            base.luc = new Stat(6);
+            health = new HealthSystem(4);
+            str = new Stat(2);  
+            dex = new Stat(11);
+            con = new Stat(9);
+            itl = new Stat(2);
+            wis = new Stat(10);
+            cha = new Stat(4);
+            luc = new Stat(6);
 
-            base.setResistances(new bool[13]); //sets all resistances to false
-            base.SetCreatureType(CreatureType.beast);
+            setResistances(new bool[13]); //sets all resistances to false
+            SetCreatureType(CreatureType.beast);
 
-            base.SetBehaviourState(BehviourState.aggressive);
+            Random rdm = new Random();
+
+            if ((int)(rdm.NextDouble() * 100) < 20)
+            {
+                SetBehaviourState(BehviourState.aggressive);
+            }
+            else
+            {
+                SetBehaviourState(BehviourState.passive);
+            }
         }
 
         public override bool ChooseAction(Map map, int[] startPos)
@@ -43,7 +52,9 @@ namespace TextRPG
             Random random = new Random();
             int choice = random.Next(0, 4);
 
-            if (base.GetBehviourState() == BehviourState.aggressive)
+            bool hasTarget = false;
+
+            if (GetBehviourState() == BehviourState.aggressive)
             {
                 //make list of targets within range
                 List<int[]> targets = new List<int[]>();
@@ -58,13 +69,12 @@ namespace TextRPG
                             //width boundry check
                             if (startPos[1] + x > 0 && startPos[1] + x < map.GetWidth())
                             {
-                                
-
                                 //set index for entity search
                                 int[] index = new int[] { startPos[0] + y, startPos[1] + x };    
                                 if (map.GetEntity(index) != null && map.GetEntity(index).GetName() != base.GetName())
                                 {
                                     targets.Add(index);
+                                    hasTarget = true;
                                 }
                             }
                         }
@@ -119,7 +129,7 @@ namespace TextRPG
                     
             }
 
-            else
+            if(GetBehviourState() != BehviourState.aggressive || !hasTarget)
             {
                 switch (choice)
                 {
@@ -162,9 +172,40 @@ namespace TextRPG
             return damageDetails;
         }
 
+        new public void TakeDamage(int[] damageDetails)
+        {
+            SetBehaviourState(BehviourState.aggressive);
+            base.TakeDamage(damageDetails);
+        }
+
         public override void OnDeath(Map map, int[] pos)
         {
-            throw new NotImplementedException();
+            for (int y = -5; y <= 5; y++)
+            {
+
+                //height boudry check
+                if (pos[0] + y > 0 && pos[0] + y < map.GetHeight())
+                {
+                    for (int x = -5; x <= 5; x++)
+                    {
+                        //width boundry check
+                        if (pos[1] + x > 0 && pos[1] + x < map.GetWidth())
+                        {
+                            //set index for entity search
+                            int[] index = new int[] { pos[0] + y, pos[1] + x };
+                            if (map.GetEntity(index) != null && map.GetEntity(index).GetName() == base.GetName())
+                            {
+                                map.GetEntity(index).specialFunction();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        public override void specialFunction()
+        {
+            SetBehaviourState(BehviourState.aggressive);
         }
     }   
 }
