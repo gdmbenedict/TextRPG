@@ -44,24 +44,24 @@ namespace TextRPG
 
             //setting enemy
             
-            pos[0] = rdm.Next(20);
-            pos[1] = rdm.Next(20);
+            pos[0] = rdm.Next(1,20);
+            pos[1] = rdm.Next(1,20);
             map.AddEntity(new Rat(), pos);
 
-            pos[0] = rdm.Next(20);
-            pos[1] = rdm.Next(20);
+            pos[0] = rdm.Next(1, 20);
+            pos[1] = rdm.Next(1, 20);
             map.AddEntity(new Rat(), pos);
 
-            pos[0] = rdm.Next(20);
-            pos[1] = rdm.Next(20);
+            pos[0] = rdm.Next(1, 20);
+            pos[1] = rdm.Next(1, 20);
             map.AddEntity(new Rat(), pos);
 
-            pos[0] = rdm.Next(20);
-            pos[1] = rdm.Next(20);
+            pos[0] = rdm.Next(1, 20);
+            pos[1] = rdm.Next(1, 20);
             map.AddEntity(new Rat(), pos);
 
-            pos[0] = rdm.Next(20);
-            pos[1] = rdm.Next(20);
+            pos[0] = rdm.Next(1, 20);
+            pos[1] = rdm.Next(1, 20);
             map.AddEntity(new Rat(), pos);
 
             map.PrintMap(0,0);
